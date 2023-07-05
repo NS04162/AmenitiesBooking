@@ -1,0 +1,28 @@
+
+<h2>Welcome to Amenities Booking Site</h2>
+<div class="container">
+  
+  <h3>Login/Register</h3>
+  
+  <form (ngSubmit)="login()">
+       
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" [(ngModel)]="username" name="username" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    <div>
+      <p>
+        <button type="submit" class="btn btn-secondary">New User SignUp Here</button>
+      </p>
+      
+    </div>
+  
+      
+    </form>
+  </div>
+  

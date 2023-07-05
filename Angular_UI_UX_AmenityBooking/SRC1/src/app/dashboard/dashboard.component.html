@@ -1,0 +1,41 @@
+<style class="body">
+  body{
+    background-image: url('images.jpg');
+    background-size: cover;
+    background-repeat:no-repeat;
+  }
+  </style>
+  
+  <div class="container">
+    <h2>Facility Booking</h2>
+  
+    <div class="form-group">
+      <label for="venue">Select Venue:</label>
+      <select id="venue" [(ngModel)]="selectedVenue" (change)="onVenueChange()">
+        <option value="">Select Venue</option>
+        <option *ngFor="let venue of venues" [value]="venue">{{ venue }}</option>
+      </select>
+    </div>
+  
+    <div class="form-group" *ngIf="selectedVenue">
+      <label for="court">Select Sports / Facilities:</label>
+      <select id="court" [(ngModel)]="selectedCourt" (change)="onCourtChange()">
+        <option value="">Select Facilities</option>
+        <option *ngFor="let court of courts" [value]="court">{{ court }}</option>
+      </select>
+    </div>
+  
+    <div class="form-group" *ngIf="selectedCourt">
+      <label for="date">Select Date:</label>
+      <input type="date" id="date" [(ngModel)]="selectedDate" [min]="minDate" [max]="maxDate" [disabled]="disableDate">
+    </div>
+  
+    <button class="btn btn-primary" (click)="bookVenue()" *ngIf="selectedVenue && selectedCourt && selectedDate">
+      Book Now
+    </button>
+  
+    <!-- --p *ngIf="selectedVenue && selectedCourt">Available Courts: > -->
+
+    <p *ngIf="bookingSuccessful">Booking successful!</p>
+  </div>
+  
