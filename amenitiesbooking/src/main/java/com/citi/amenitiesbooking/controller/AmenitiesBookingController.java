@@ -1,62 +1,101 @@
 package com.citi.amenitiesbooking.controller;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.citi.amenitiesbooking.model.AmenitiesBookingRequest;
 import com.citi.amenitiesbooking.model.AmenitiesBookingResponse;
 import com.citi.amenitiesbooking.model.CustomerLoginRequest;
 import com.citi.amenitiesbooking.model.CustomerLoginResponse;
+import com.citi.amenitiesbooking.model.CustomerSignupRequest;
+import com.citi.amenitiesbooking.model.CustomerSignupResponse;
 import com.citi.amenitiesbooking.service.AmenitiesBookServiceImpl;
 import com.citi.amenitiesbooking.service.AmenitiesViewServiceImpl;
 import com.citi.amenitiesbooking.service.LoginServiceImpl;
+import com.citi.amenitiesbooking.service.SignupServiceImpl;
 
 @RestController
 public class AmenitiesBookingController {
-	
+
 	@Autowired
 	private AmenitiesViewServiceImpl amenitiesViewService;
-	
+
 	@Autowired
 	private AmenitiesBookServiceImpl amenitiesBookService;
-	
+
 	@Autowired
 	private LoginServiceImpl loginService;
-	
-	@RequestMapping("AmenitiesBooking/Login")
-	public ResponseEntity<CustomerLoginResponse> login(CustomerLoginRequest request){
-		
-		CustomerLoginResponse response = loginService.validate(request);
-		if (response != null) {
-			return new ResponseEntity<CustomerLoginResponse>(response, HttpStatus.OK);
+
+	@Autowired
+	private SignupServiceImpl signupService;
+
+	@GetMapping("AmenitiesBooking/Login")
+	public ResponseEntity<CustomerLoginResponse> login(@RequestBody CustomerLoginRequest request){
+		System.out.println(request);
+		CustomerLoginResponse response= null;
+		if (request != null) {
+
+			response = loginService.login(request);
+			if (response != null) {
+				return new ResponseEntity<CustomerLoginResponse>(response, HttpStatus.OK);
+			}
+
 		}
-		
 		return new ResponseEntity<CustomerLoginResponse>(response, HttpStatus.BAD_REQUEST);
 	}
 
-	
-	@RequestMapping("AmenitiesBooking/Amenities/view")
-	public ResponseEntity<AmenitiesBookingResponse> viewAmenities(){
-		AmenitiesBookingResponse response = amenitiesViewService.view();
+	@PostMapping("AmenitiesBooking/signup")
+	public ResponseEntity<CustomerSignupResponse> signup(CustomerSignupRequest request){
+
+		CustomerSignupResponse response = new CustomerSignupResponse();
+		if (request != null) {
+			response = signupService.signup(request);
+			return new ResponseEntity<CustomerSignupResponse>(response, HttpStatus.OK);
+		}
+
+		return new ResponseEntity<CustomerSignupResponse>(response, HttpStatus.BAD_REQUEST);
+	}
+
+
+	@GetMapping("AmenitiesBooking/Amenities/view")
+	public ResponseEntity<AmenitiesBookingResponse> viewAmenities(@RequestParam ("loc") String location){
+		AmenitiesBookingResponse response = amenitiesViewService.viewAmenities(location);
 		if (response != null) {
 			return new ResponseEntity<>(response,HttpStatus.OK);
 		}
-			return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
-		
+		return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+
+	}
+
+	@GetMapping("AmenitiesBooking/Amenities/checkAvailability")
+	public int checkAvailability(String location, int amenitiesCode, Date bookingDate) {
+		if (!location.isEmpty() && bookingDate != null) {
+			return amenitiesBookService.checkAvailability(location, amenitiesCode, bookingDate);
+		}
+		return 0;
 	}
 	
-	@RequestMapping("AmenitiesBooking/Amenities/book")
-	public ResponseEntity<AmenitiesBookingResponse> bookAmenities(AmenitiesBookingRequest request){
-		AmenitiesBookingResponse response = amenitiesBookService.book();
-		if (response != null)
-			return new ResponseEntity<>(response,HttpStatus.OK);
-		else
-			return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
-		
+	@PostMapping("AmenitiesBooking/Amenities/book")
+	public ResponseEntity<AmenitiesBookingResponse> bookAmenities(@RequestBody AmenitiesBookingRequest request){
+		System.out.println(request);
+		AmenitiesBookingResponse response = null;
+		if (request != null) {
+			response = amenitiesBookService.book(request);
+			if (response != null)
+				return new ResponseEntity<>(response,HttpStatus.OK);						
+
+		}
+		return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
 	}
 
 }

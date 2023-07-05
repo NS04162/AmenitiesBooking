@@ -1,41 +1,34 @@
-package com.citi.amenitiesbooking.entity;
+package com.citi.amenitiesbooking.model;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-public class CustomerLoginInfo {
+public class CustomerSignupRequest {
 	
 	private String userName;
 	private String password;
 	
-	
-	public CustomerLoginInfo() {
+	public CustomerSignupRequest() {
 		super();
 	}
 	
-	public CustomerLoginInfo(String userName, String password) {
+		public CustomerSignupRequest(String userName, String password) {
 		super();
 		this.userName = userName;
 		this.password = password;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
 
 }

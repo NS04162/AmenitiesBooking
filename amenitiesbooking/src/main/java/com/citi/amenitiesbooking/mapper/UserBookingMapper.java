@@ -10,8 +10,8 @@ import com.citi.amenitiesbooking.entity.UserBookingInfo;
 @Mapper
 public interface UserBookingMapper {
 	
-	@Insert("insert into UserBookingInfo values (bookingId, emailId, bookedTurfNo, contactNo")
-	UserBookingInfo updateUser(String bookingId, String emailId, String bookedTurfNo, int contactNo);
+	@Insert("insert into UserBookingInfo values (#{bookingId}, #{emailId}, #{bookedTurfNo}, #{contactNo})")
+	int updateUser(String bookingId, String emailId, String bookedTurfNo, int contactNo);
 		
 	
 
