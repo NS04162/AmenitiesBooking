@@ -1,0 +1,100 @@
+create database GroupK_AmenitiesBooking;
+use GroupK_AmenitiesBooking
+create table DLF_AmenitiesInfo
+(
+amenitiesCode Int(3),
+amenitiesName Varchar(50),
+bookingDate Date,
+totalCount Int(3),
+currentAvailableCount Int(3)
+);
+Insert into DLF_AmenitiesInfo values
+(1,'Badminton','2023-07-05',5,5),
+(1,'Badminton','2023-07-06',5,5),
+(1,'Badminton','2023-07-07',5,5),
+(1,'Badminton','2023-07-08',5,5),
+(1,'Badminton','2023-07-09',5,5),
+(1,'Badminton','2023-07-10',5,5),
+(1,'Badminton','2023-07-11',5,5),
+(1,'Badminton','2023-07-12',5,5),
+(2,'WorkCafe','2023-07-05',3,3),
+(2,'WorkCafe','2023-07-06',3,3),
+(2,'WorkCafe','2023-07-07',3,3),
+(2,'WorkCafe','2023-07-08',3,3),
+(2,'WorkCafe','2023-07-09',3,3),
+(2,'WorkCafe','2023-07-10',3,3),
+(2,'WorkCafe','2023-07-11',3,3),
+(2,'WorkCafe','2023-07-12',3,3),
+(3,'Cafe','2023-07-05',8,8),
+(3,'Cafe','2023-07-06',8,8),
+(3,'Cafe','2023-07-07',8,8),
+(3,'Cafe','2023-07-08',8,8),
+(3,'Cafe','2023-07-09',8,8),
+(3,'Cafe','2023-07-10',8,8),
+(3,'Cafe','2023-07-11',8,8),
+(3,'Cafe','2023-07-12',8,8),
+(4,'Foodball','2023-07-05',5,5),
+(4,'Foodball','2023-07-06',5,5),
+(4,'Foodball','2023-07-07',5,5),
+(4,'Foodball','2023-07-08',5,5),
+(4,'Foodball','2023-07-09',5,5),
+(4,'Foodball','2023-07-10',5,5),
+(4,'Foodball','2023-07-11',5,5),
+(4,'Foodball','2023-07-12',5,5);
+create table RIC_AmenitiesInfo
+(
+amenitiesCode Int(3),
+amenitiesName Varchar(50),
+bookingDate Date,
+totalCount Int(3),
+currentAvailableCount Int(3)
+);
+Insert into RIC_AmenitiesInfo values
+(1,'Badminton','2023-07-05',5,5),
+(1,'Badminton','2023-07-06',5,5),
+(1,'Badminton','2023-07-07',5,5),
+(1,'Badminton','2023-07-08',5,5),
+(1,'Badminton','2023-07-09',5,5),
+(1,'Badminton','2023-07-10',5,5),
+(1,'Badminton','2023-07-11',5,5),
+(1,'Badminton','2023-07-12',5,5),
+(2,'WorkCafe','2023-07-05',3,3),
+(2,'WorkCafe','2023-07-06',3,3),
+(2,'WorkCafe','2023-07-07',3,3),
+(2,'WorkCafe','2023-07-08',3,3),
+(2,'WorkCafe','2023-07-09',3,3),
+(2,'WorkCafe','2023-07-10',3,3),
+(2,'WorkCafe','2023-07-11',3,3),
+(2,'WorkCafe','2023-07-12',3,3),
+(3,'Cafe','2023-07-05',8,8),
+(3,'Cafe','2023-07-06',8,8),
+(3,'Cafe','2023-07-07',8,8),
+(3,'Cafe','2023-07-08',8,8),
+(3,'Cafe','2023-07-09',8,8),
+(3,'Cafe','2023-07-10',8,8),
+(3,'Cafe','2023-07-11',8,8),
+(3,'Cafe','2023-07-12',8,8),
+(4,'Foodball','2023-07-05',5,5),
+(4,'Foodball','2023-07-06',5,5),
+(4,'Foodball','2023-07-07',5,5),
+(4,'Foodball','2023-07-08',5,5),
+(4,'Foodball','2023-07-09',5,5),
+(4,'Foodball','2023-07-10',5,5),
+(4,'Foodball','2023-07-11',5,5),
+(4,'Foodball','2023-07-12',5,5);
+create table CustomerLoginInfo
+(
+userName varchar(100),
+password Varchar(50)
+);
+Insert into CustomerLoginInfo values
+('user1@gmail.com','qwerty'),
+('user2@gmail.com','qwerty'),
+('user3@gmail.com','qwerty');
+create table UserBookingInfo
+(
+bookingId varchar(50),
+emailId Varchar(100),
+bookedTurfNo varchar(5),
+contactNo int(10)
+);
