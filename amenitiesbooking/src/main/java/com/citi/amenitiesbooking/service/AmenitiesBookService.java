@@ -9,5 +9,6 @@ public interface AmenitiesBookService {
 	
 	AmenitiesBookingResponse book(AmenitiesBookingRequest request);
 	int checkAvailability(String location, int amenitiesCode, Date bookingDate);
+	
 
 }

@@ -33,14 +33,14 @@ Insert into DLF_AmenitiesInfo values
 (3,'Cafe','2023-07-10',8,8),
 (3,'Cafe','2023-07-11',8,8),
 (3,'Cafe','2023-07-12',8,8),
-(4,'Foodball','2023-07-05',5,5),
-(4,'Foodball','2023-07-06',5,5),
-(4,'Foodball','2023-07-07',5,5),
-(4,'Foodball','2023-07-08',5,5),
-(4,'Foodball','2023-07-09',5,5),
-(4,'Foodball','2023-07-10',5,5),
-(4,'Foodball','2023-07-11',5,5),
-(4,'Foodball','2023-07-12',5,5);
+(4,'Football','2023-07-05',5,5),
+(4,'Football','2023-07-06',5,5),
+(4,'Football','2023-07-07',5,5),
+(4,'Football','2023-07-08',5,5),
+(4,'Football','2023-07-09',5,5),
+(4,'Football','2023-07-10',5,5),
+(4,'Football','2023-07-11',5,5),
+(4,'Football','2023-07-12',5,5);
 create table RIC_AmenitiesInfo
 (
 amenitiesCode Int(3),
@@ -74,14 +74,14 @@ Insert into RIC_AmenitiesInfo values
 (3,'Cafe','2023-07-10',8,8),
 (3,'Cafe','2023-07-11',8,8),
 (3,'Cafe','2023-07-12',8,8),
-(4,'Foodball','2023-07-05',5,5),
-(4,'Foodball','2023-07-06',5,5),
-(4,'Foodball','2023-07-07',5,5),
-(4,'Foodball','2023-07-08',5,5),
-(4,'Foodball','2023-07-09',5,5),
-(4,'Foodball','2023-07-10',5,5),
-(4,'Foodball','2023-07-11',5,5),
-(4,'Foodball','2023-07-12',5,5);
+(4,'Football','2023-07-05',5,5),
+(4,'Football','2023-07-06',5,5),
+(4,'Football','2023-07-07',5,5),
+(4,'Football','2023-07-08',5,5),
+(4,'Football','2023-07-09',5,5),
+(4,'Football','2023-07-10',5,5),
+(4,'Football','2023-07-11',5,5),
+(4,'Football','2023-07-12',5,5);
 create table CustomerLoginInfo
 (
 userName varchar(100),

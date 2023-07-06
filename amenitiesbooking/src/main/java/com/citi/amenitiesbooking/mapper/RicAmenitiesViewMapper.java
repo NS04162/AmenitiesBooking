@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface RicAmenitiesViewMapper {
 	
-	@Select("select distinct amenitiesCode, AmenitiesName from RicAmenitiesInfo")
-	List<Map<Integer, String>> viewAmenities();
+	@Select("select distinct amenitiesName, AmenitiesCode from RicAmenitiesInfo")
+	List<Map<String, Object>> viewAmenities();
 
 }

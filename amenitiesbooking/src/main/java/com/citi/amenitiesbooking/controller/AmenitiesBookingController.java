@@ -1,5 +1,6 @@
 package com.citi.amenitiesbooking.controller;
 
+import java.net.http.HttpRequest;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class AmenitiesBookingController {
 	private SignupServiceImpl signupService;
 
 	@GetMapping("AmenitiesBooking/Login")
-	public ResponseEntity<CustomerLoginResponse> login(@RequestBody CustomerLoginRequest request){
+	public ResponseEntity<CustomerLoginResponse> login(HttpRequest httpRequest, @RequestBody CustomerLoginRequest request){
 		System.out.println(request);
 		CustomerLoginResponse response= null;
 		if (request != null) {
@@ -55,7 +56,7 @@ public class AmenitiesBookingController {
 	}
 
 	@PostMapping("AmenitiesBooking/signup")
-	public ResponseEntity<CustomerSignupResponse> signup(CustomerSignupRequest request){
+	public ResponseEntity<CustomerSignupResponse> signup(@RequestBody CustomerSignupRequest request){
 
 		CustomerSignupResponse response = new CustomerSignupResponse();
 		if (request != null) {
@@ -78,13 +79,13 @@ public class AmenitiesBookingController {
 	}
 
 	@GetMapping("AmenitiesBooking/Amenities/checkAvailability")
-	public int checkAvailability(String location, int amenitiesCode, Date bookingDate) {
+	public int checkAvailability(@RequestParam ("loc") String location, @RequestParam ("aCode") int amenitiesCode, @RequestParam ("bDate") Date bookingDate) {
 		if (!location.isEmpty() && bookingDate != null) {
 			return amenitiesBookService.checkAvailability(location, amenitiesCode, bookingDate);
 		}
 		return 0;
 	}
-	
+
 	@PostMapping("AmenitiesBooking/Amenities/book")
 	public ResponseEntity<AmenitiesBookingResponse> bookAmenities(@RequestBody AmenitiesBookingRequest request){
 		System.out.println(request);

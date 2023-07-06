@@ -13,7 +13,7 @@ public class AmenitiesBookingResponse {
 	private String bookingId;
 	private String amenityTurfDetail;
 	private boolean bookingFlag;
-	private List<Map<Integer, String>> availableAmenities;
+	private List<Map<String, Integer>> availableAmenities;
 	
 	public AmenitiesBookingResponse() {
 		super();
@@ -21,7 +21,7 @@ public class AmenitiesBookingResponse {
 
 
 	public AmenitiesBookingResponse(String bookingId, String amenityTurfDetail, boolean bookingFlag,
-			List<Map<Integer, String>> availableAmenities) {
+			List<Map<String, Integer>> availableAmenities) {
 		super();
 		this.bookingId = bookingId;
 		this.amenityTurfDetail = amenityTurfDetail;
@@ -55,12 +55,12 @@ public class AmenitiesBookingResponse {
 	}
 
 
-	public List<Map<Integer, String>> getAvailableAmenities() {
+	public List<Map<String, Integer>> getAvailableAmenities() {
 		return availableAmenities;
 	}
 
 
-	public void setAvailableAmenities(List<Map<Integer, String>> availableAmenities) {
+	public void setAvailableAmenities(List<Map<String, Integer>> availableAmenities) {
 		this.availableAmenities = availableAmenities;
 	}
 
