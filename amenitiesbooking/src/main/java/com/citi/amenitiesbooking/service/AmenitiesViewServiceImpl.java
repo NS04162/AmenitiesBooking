@@ -1,6 +1,7 @@
 package com.citi.amenitiesbooking.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class AmenitiesViewServiceImpl implements AmenitiesViewService{
 	@Override
 	public AmenitiesBookingResponse viewAmenities(String location) {
 		List<Map<String, Object>> amenitiesList=null;
+		List<Map<String,Integer>> finalList = new ArrayList<>();
 		
 		if (location.equalsIgnoreCase("DLF"))
 			amenitiesList = dlfAmenitiesViewMapper.viewAmenities();
@@ -32,13 +34,14 @@ public class AmenitiesViewServiceImpl implements AmenitiesViewService{
 			amenitiesList = ricAmenitiesViewMapper.viewAmenities();
 		
 		AmenitiesBookingResponse response = new AmenitiesBookingResponse();
+		Map<String, Integer> resultMap = new HashMap<>();
 		if (amenitiesList != null) {
 			for(Map<String,Object> entry:amenitiesList) {
-				Map<String, Integer> resultMap = new HashMap<>();
 				resultMap.put((String)entry.get("amenitiesName"), ((Number)entry.get("amenitiesCode")).intValue());
-				System.out.println(resultMap);
+
 			}
-	//		response.setAvailableAmenities(amenitiesList);
+			finalList.add(resultMap);
+			response.setAvailableAmenities(finalList);
 			return response;
 		}
 		
