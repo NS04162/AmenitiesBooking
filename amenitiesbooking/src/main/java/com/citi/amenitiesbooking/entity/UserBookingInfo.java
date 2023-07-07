@@ -1,5 +1,7 @@
 package com.citi.amenitiesbooking.entity;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +13,7 @@ public class UserBookingInfo {
 	private String emailId;
 	private String bookedTurfNo;
 	private int contactNo;
-	
+	private Date bookingDate;
 	
 	public UserBookingInfo() {
 		super();
@@ -39,14 +41,32 @@ public class UserBookingInfo {
 	public String getBookedTurfNo() {
 		return bookedTurfNo;
 	}
+	
+	public Date getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(Date bookingDate) {
+		this.bookingDate = bookingDate;
+	}
+
 	public void setBookedTurfNo(String bookedTurfNo) {
 		this.bookedTurfNo = bookedTurfNo;
 	}
+	
+	
 	public int getContactNo() {
 		return contactNo;
 	}
 	public void setContactNo(int contactNo) {
 		this.contactNo = contactNo;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "UserBookingInfo [bookingId=" + bookingId + ", emailId=" + emailId + ", bookedTurfNo=" + bookedTurfNo
+				+ ", contactNo=" + contactNo + "]";
 	}
 	
 	
