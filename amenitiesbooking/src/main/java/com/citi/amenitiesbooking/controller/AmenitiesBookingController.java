@@ -78,10 +78,10 @@ public class AmenitiesBookingController {
 
 	}
 
-	@GetMapping("AmenitiesBooking/Amenities/checkAvailability")
-	public int checkAvailability(@RequestParam ("loc") String location, @RequestParam ("aCode") int amenitiesCode, @RequestParam ("bDate") Date bookingDate) {
-		if (!location.isEmpty() && bookingDate != null) {
-			return amenitiesBookService.checkAvailability(location, amenitiesCode, bookingDate);
+	@PostMapping("AmenitiesBooking/Amenities/checkAvailability")
+	public int checkAvailability(@RequestBody AmenitiesBookingRequest request) {
+		if (!request.getLocation().isEmpty() && request.getBookingDate() != null) {
+			return amenitiesBookService.checkAvailability(request.getLocation(), request.getAmenitiesCode(), request.getBookingDate());
 		}
 		return 0;
 	}

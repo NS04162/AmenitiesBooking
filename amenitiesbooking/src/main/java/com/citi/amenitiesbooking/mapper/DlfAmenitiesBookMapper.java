@@ -17,10 +17,10 @@ public interface DlfAmenitiesBookMapper {
 	@Update("update DLF_AmenitiesInfo  set currentAvailableCount = currentAvailableCount - 1 where amenitiesCode = #{code} and bookingDate = #{date}")
 	boolean bookAmenities(int code, Date date);
 	
-	@Update("update DLF_AmenitiesInfo set currentAvailableCount = totalCount, bookingDate = bookingDate + 8")
-	boolean updateAmenitiesInfo();
-	
-	@Select("select min(bookingDate) from DLF_AmenitiesInfo")
-	Date checkBookingDate();
+	@Update("update DLF_AmenitiesInfo set currentAvailableCount = totalCount, bookingDate = bookingDate + 8 where DATEDIFF(bookingDate, #{currentDate}) < 0")
+	boolean updateAmenitiesInfo(java.util.Date currentDate);
+//	
+//	@Select("select min(bookingDate) from DLF_AmenitiesInfo")
+//	Date checkBookingDate();
 
 }

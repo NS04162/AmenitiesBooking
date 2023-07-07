@@ -1,6 +1,7 @@
 package com.citi.amenitiesbooking.service;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.temporal.ChronoUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class AmenitiesBookServiceImpl implements AmenitiesBookService{
 				int count = (amenitiesInfo.getTotalCount() - amenitiesInfo.getCurrentAvailableCount()) + 1;
 				String turfNo = request.getLocation() + "-" + amenitiesInfo.getAmenitiesName().charAt(0) + count;
 				String bookingId = amenitiesInfo.getAmenitiesCode() + turfNo + amenitiesInfo.getBookingDate().toString();
-				if (request.getLocation().equalsIgnoreCase("DLF"))
+				if (request.getLocation().equalsIgnoreCase("DLF")) 
 					dlfAmenitiesBookMapper.bookAmenities(request.getAmenitiesCode(), request.getBookingDate());
 				else
 					ricAmenitiesBookMapper.bookAmenities(request.getAmenitiesCode(), request.getBookingDate());
@@ -62,31 +63,32 @@ public class AmenitiesBookServiceImpl implements AmenitiesBookService{
 
 	@Override
 	public int checkAvailability(String location, int amenitiesCode, Date bookingDate) {
-		if (location.equalsIgnoreCase("DLF")) {
-			Date minBookingdate = dlfAmenitiesBookMapper.checkBookingDate();
-			long dateDiff = ChronoUnit.DAYS.between(minBookingdate.toLocalDate(),bookingDate.toLocalDate());
-			if (dateDiff == 8)
-				updateAvailability(location);
+		
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date currentDate = new java.util.Date();
+		
+		System.out.println("date :: "+sdFormat.format(currentDate));
+		Date sqlDate = new Date (currentDate.getTime());
+
+		if (location.equalsIgnoreCase("DLF")) {				
+		    updateAvailability(location,sqlDate);
 		
 			return dlfAmenitiesBookMapper.checkAvailability(amenitiesCode, bookingDate).getCurrentAvailableCount();
 		}
 		else {
-			Date minBookingdate = ricAmenitiesBookMapper.checkBookingDate();
-			long dateDiff = ChronoUnit.DAYS.between(minBookingdate.toLocalDate(),bookingDate.toLocalDate());
-			if (dateDiff == 8)
-				updateAvailability(location);
+				updateAvailability(location,sqlDate);
 		
 			return ricAmenitiesBookMapper.checkAvailability(amenitiesCode, bookingDate).getCurrentAvailableCount();
 		}
 
 	}
 
-	private void updateAvailability(String location) {
+	private void updateAvailability(String location, Date currentDate) {
 		
 		if (location.equalsIgnoreCase("DLF"))
-			dlfAmenitiesBookMapper.updateAmenitiesInfo();
+			dlfAmenitiesBookMapper.updateAmenitiesInfo(currentDate);
 		else
-			ricAmenitiesBookMapper.updateAmenitiesInfo();
+			ricAmenitiesBookMapper.updateAmenitiesInfo(currentDate);
 
 	}
 

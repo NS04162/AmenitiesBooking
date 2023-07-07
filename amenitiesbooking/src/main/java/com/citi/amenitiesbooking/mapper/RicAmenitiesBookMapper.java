@@ -18,9 +18,8 @@ public interface RicAmenitiesBookMapper {
 	@Update("update RicAmenitiesInfo set currentAvailableCount = currentAvailableCount - 1 where amenitiesCode = #{code} and bookingDate = #{date}")
 	boolean bookAmenities(int code, Date date);
 
-	@Update("update RIC_AmenitiesInfo set currentAvailableCount = totalCount and bookingDate = bookingDate + 8")
-	boolean updateAmenitiesInfo();
+	@Update("update RIC_AmenitiesInfo  set currentAvailableCount = totalCount, bookingDate = bookingDate + 8 where DATEDIFF(bookingDate, #{currentDate}) < 0")
+	boolean updateAmenitiesInfo(Date currentDate);
 	
-	@Select("select min(bookingDate) from RIC_AmenitiesInfo")
-	Date checkBookingDate();
+	
 }
