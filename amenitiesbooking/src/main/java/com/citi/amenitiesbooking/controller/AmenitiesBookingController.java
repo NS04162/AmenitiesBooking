@@ -2,6 +2,7 @@ package com.citi.amenitiesbooking.controller;
 
 import java.net.http.HttpRequest;
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.citi.amenitiesbooking.model.AmenitiesBookingRequest;
 import com.citi.amenitiesbooking.model.AmenitiesBookingResponse;
+import com.citi.amenitiesbooking.model.BookingInqResponse;
 import com.citi.amenitiesbooking.model.CustomerLoginRequest;
 import com.citi.amenitiesbooking.model.CustomerLoginResponse;
 import com.citi.amenitiesbooking.model.CustomerSignupRequest;
 import com.citi.amenitiesbooking.model.CustomerSignupResponse;
 import com.citi.amenitiesbooking.service.AmenitiesBookServiceImpl;
 import com.citi.amenitiesbooking.service.AmenitiesViewServiceImpl;
+import com.citi.amenitiesbooking.service.BookingInqService;
 import com.citi.amenitiesbooking.service.LoginServiceImpl;
 import com.citi.amenitiesbooking.service.SignupServiceImpl;
 
@@ -39,6 +42,9 @@ public class AmenitiesBookingController {
 
 	@Autowired
 	private SignupServiceImpl signupService;
+	
+	@Autowired
+	private BookingInqService bookingInqService;
 
 	@GetMapping("AmenitiesBooking/Login")
 	public ResponseEntity<CustomerLoginResponse> login(HttpRequest httpRequest, @RequestBody CustomerLoginRequest request){
@@ -97,6 +103,12 @@ public class AmenitiesBookingController {
 
 		}
 		return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+	}
+	
+	@GetMapping("AminitiesBooking/bookingInq")
+	public ResponseEntity<List<BookingInqResponse>> inq(@RequestParam ("loc") String location,@RequestParam ("fromDate") Date fromDate,@RequestParam ("toDate") Date toDate){
+		List<BookingInqResponse> response=bookingInqService.bookInq(location, fromDate, toDate);
+		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 
 }

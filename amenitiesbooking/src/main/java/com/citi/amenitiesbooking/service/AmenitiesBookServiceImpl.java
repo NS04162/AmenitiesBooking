@@ -48,7 +48,7 @@ public class AmenitiesBookServiceImpl implements AmenitiesBookService{
 				else
 					ricAmenitiesBookMapper.bookAmenities(request.getAmenitiesCode(), request.getBookingDate());
 
-				userBookingMapper.updateUser(bookingId,request.getEmailId(),turfNo, request.getContactNo());
+				userBookingMapper.updateUser(bookingId,request.getEmailId(),turfNo, request.getContactNo(),request.getBookingDate());
 				response.setAmenityTurfDetail(turfNo);
 				response.setBookingFlag(true);
 				response.setBookingId(bookingId);
