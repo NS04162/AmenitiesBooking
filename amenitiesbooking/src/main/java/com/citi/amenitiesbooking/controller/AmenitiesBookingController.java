@@ -1,13 +1,12 @@
 package com.citi.amenitiesbooking.controller;
 
-import java.net.http.HttpRequest;
 import java.sql.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,20 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.citi.amenitiesbooking.model.AmenitiesBookingRequest;
 import com.citi.amenitiesbooking.model.AmenitiesBookingResponse;
-import com.citi.amenitiesbooking.model.BookingInqResponse;
 import com.citi.amenitiesbooking.model.CustomerLoginRequest;
 import com.citi.amenitiesbooking.model.CustomerLoginResponse;
 import com.citi.amenitiesbooking.model.CustomerSignupRequest;
 import com.citi.amenitiesbooking.model.CustomerSignupResponse;
 import com.citi.amenitiesbooking.service.AmenitiesBookServiceImpl;
 import com.citi.amenitiesbooking.service.AmenitiesViewServiceImpl;
-import com.citi.amenitiesbooking.service.BookingInqService;
 import com.citi.amenitiesbooking.service.LoginServiceImpl;
 import com.citi.amenitiesbooking.service.SignupServiceImpl;
 
 @RestController
+
+@CrossOrigin(origins = "http://localhost:4200" , allowedHeaders = "*")
 public class AmenitiesBookingController {
 
+	
 	@Autowired
 	private AmenitiesViewServiceImpl amenitiesViewService;
 
@@ -42,12 +42,9 @@ public class AmenitiesBookingController {
 
 	@Autowired
 	private SignupServiceImpl signupService;
-	
-	@Autowired
-	private BookingInqService bookingInqService;
 
-	@GetMapping("AmenitiesBooking/Login")
-	public ResponseEntity<CustomerLoginResponse> login(HttpRequest httpRequest, @RequestBody CustomerLoginRequest request){
+	@PostMapping("AmenitiesBooking/Login")
+	public ResponseEntity<CustomerLoginResponse> login(@RequestBody CustomerLoginRequest request){
 		System.out.println(request);
 		CustomerLoginResponse response= null;
 		if (request != null) {
@@ -73,7 +70,7 @@ public class AmenitiesBookingController {
 		return new ResponseEntity<CustomerSignupResponse>(response, HttpStatus.BAD_REQUEST);
 	}
 
-
+	
 	@GetMapping("AmenitiesBooking/Amenities/view")
 	public ResponseEntity<AmenitiesBookingResponse> viewAmenities(@RequestParam ("loc") String location){
 		AmenitiesBookingResponse response = amenitiesViewService.viewAmenities(location);
@@ -91,7 +88,7 @@ public class AmenitiesBookingController {
 		}
 		return 0;
 	}
-
+	
 	@PostMapping("AmenitiesBooking/Amenities/book")
 	public ResponseEntity<AmenitiesBookingResponse> bookAmenities(@RequestBody AmenitiesBookingRequest request){
 		System.out.println(request);
@@ -103,12 +100,6 @@ public class AmenitiesBookingController {
 
 		}
 		return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
-	}
-	
-	@GetMapping("AminitiesBooking/bookingInq")
-	public ResponseEntity<List<BookingInqResponse>> inq(@RequestParam ("loc") String location,@RequestParam ("fromDate") Date fromDate,@RequestParam ("toDate") Date toDate){
-		List<BookingInqResponse> response=bookingInqService.bookInq(location, fromDate, toDate);
-		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 
 }
