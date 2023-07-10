@@ -37,11 +37,13 @@ public class AmenitiesViewServiceImpl implements AmenitiesViewService{
 		Map<String, Integer> resultMap = new HashMap<>();
 		if (amenitiesList != null) {
 			for(Map<String,Object> entry:amenitiesList) {
+				System.out.println("INSDE 1234");
 				resultMap.put((String)entry.get("amenitiesName"), ((Number)entry.get("amenitiesCode")).intValue());
 
 			}
 			finalList.add(resultMap);
 			response.setAvailableAmenities(finalList);
+			System.out.println("INSDE 5678");
 			return response;
 		}
 		
