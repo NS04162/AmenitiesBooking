@@ -1,7 +1,7 @@
 package com.citi.amenitiesbooking.controller;
 
 import java.sql.Date;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -25,6 +25,9 @@ import com.citi.amenitiesbooking.service.AmenitiesViewServiceImpl;
 import com.citi.amenitiesbooking.service.LoginServiceImpl;
 import com.citi.amenitiesbooking.service.SignupServiceImpl;
 
+import com.citi.amenitiesbooking.model.BookingInqResponse;
+import com.citi.amenitiesbooking.service.BookingInqService;
+
 @RestController
 
 @CrossOrigin(origins = "http://localhost:4200" , allowedHeaders = "*")
@@ -42,7 +45,9 @@ public class AmenitiesBookingController {
 
 	@Autowired
 	private SignupServiceImpl signupService;
-
+	@Autowired
+	private BookingInqService bookingInqService;
+	
 	@PostMapping("AmenitiesBooking/Login")
 	public ResponseEntity<CustomerLoginResponse> login(@RequestBody CustomerLoginRequest request){
 		System.out.println(request);
@@ -58,6 +63,13 @@ public class AmenitiesBookingController {
 		return new ResponseEntity<CustomerLoginResponse>(response, HttpStatus.BAD_REQUEST);
 	}
 
+
+	@GetMapping("AminitiesBooking/bookingInq")
+	public ResponseEntity<List<BookingInqResponse>> inq(@RequestParam ("loc") String location,@RequestParam ("fromDate") Date fromDate,@RequestParam ("toDate") Date toDate){
+		List<BookingInqResponse> response=bookingInqService.bookInq(location, fromDate, toDate);
+		return new ResponseEntity<>(response,HttpStatus.OK);
+	}
+	
 	@PostMapping("AmenitiesBooking/signup")
 	public ResponseEntity<CustomerSignupResponse> signup(@RequestBody CustomerSignupRequest request){
 
