@@ -13,7 +13,7 @@ import com.citi.amenitiesbooking.entity.AmenitiesInfo;
 public interface RicAmenitiesBookMapper {
 	
 	@Select("select * from RicAmenitiesInfo where amenitiesCode = #{code} and bookingDate = #{date} and currentAvailableCount > 0")
-	AmenitiesInfo checkAvailability(int Code, Date date);
+	AmenitiesInfo checkAvailability(int code, Date date);
 	
 	@Update("update RicAmenitiesInfo set currentAvailableCount = currentAvailableCount - 1 where amenitiesCode = #{code} and bookingDate = #{date}")
 	boolean bookAmenities(int code, Date date);
