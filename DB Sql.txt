@@ -95,7 +95,6 @@ create table UserBookingInfo
 (
 bookingId varchar(50),
 emailId Varchar(100),
-bookedTurfNo varchar(20),
-contactNo int(10),
-bookingdate Date
+bookedTurfNo varchar(5),
+contactNo int(10)
 );
