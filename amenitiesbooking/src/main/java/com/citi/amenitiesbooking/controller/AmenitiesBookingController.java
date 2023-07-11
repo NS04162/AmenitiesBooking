@@ -1,5 +1,6 @@
 package com.citi.amenitiesbooking.controller;
 
+import java.net.http.HttpRequest;
 import java.sql.Date;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,7 @@ import com.citi.amenitiesbooking.service.LoginServiceImpl;
 import com.citi.amenitiesbooking.service.SignupServiceImpl;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200" , allowedHeaders = "*")
 public class AmenitiesBookingController {
 
 	@Autowired
@@ -46,7 +49,7 @@ public class AmenitiesBookingController {
 	@Autowired
 	private BookingInqService bookingInqService;
 
-	@GetMapping("AmenitiesBooking/Login")
+	@PostMapping("AmenitiesBooking/Login")
 	public ResponseEntity<CustomerLoginResponse> login(@RequestBody CustomerLoginRequest request){
 		System.out.println(request);
 		CustomerLoginResponse response= null;
