@@ -1,6 +1,5 @@
 package com.citi.amenitiesbooking.controller;
 
-import java.net.http.HttpRequest;
 import java.sql.Date;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class AmenitiesBookingController {
 	private BookingInqService bookingInqService;
 
 	@GetMapping("AmenitiesBooking/Login")
-	public ResponseEntity<CustomerLoginResponse> login(HttpRequest httpRequest, @RequestBody CustomerLoginRequest request){
+	public ResponseEntity<CustomerLoginResponse> login(@RequestBody CustomerLoginRequest request){
 		System.out.println(request);
 		CustomerLoginResponse response= null;
 		if (request != null) {
