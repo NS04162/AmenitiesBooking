@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.citi.amenitiesbooking.model.AmenitiesBookingRequest;
 import com.citi.amenitiesbooking.model.AmenitiesBookingResponse;
+import com.citi.amenitiesbooking.model.BookingInqRequest;
 import com.citi.amenitiesbooking.model.BookingInqResponse;
 import com.citi.amenitiesbooking.model.CustomerLoginRequest;
 import com.citi.amenitiesbooking.model.CustomerLoginResponse;
@@ -105,9 +106,9 @@ public class AmenitiesBookingController {
 		return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
 	}
 	
-	@GetMapping("AminitiesBooking/bookingInq")
-	public ResponseEntity<List<BookingInqResponse>> inq(@RequestParam ("loc") String location,@RequestParam ("fromDate") Date fromDate,@RequestParam ("toDate") Date toDate){
-		List<BookingInqResponse> response=bookingInqService.bookInq(location, fromDate, toDate);
+	@PostMapping("AminitiesBooking/bookingInq")
+	public ResponseEntity<List<BookingInqResponse>> inq(@RequestBody BookingInqRequest request){
+		List<BookingInqResponse> response=bookingInqService.bookInq(request);
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 
