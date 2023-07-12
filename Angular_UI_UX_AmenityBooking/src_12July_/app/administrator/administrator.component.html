@@ -1,0 +1,85 @@
+
+<div class="container">
+    <h2>Sports/Facilities Booking Details</h2>
+    </div>
+    <div class="form">
+    <div class="form-group">
+      <label for="venue">Select Venue:</label>
+      <select id="venue" name="selectedVenue" [(ngModel)]="selectedVenue">
+        <option value="">Select Venue</option>
+        <option *ngFor="let venue of venues" [value]="venue">{{ venue }}</option>
+      </select>
+    </div>
+    </div>
+   <mat-form-field>
+    <mat-label>Start Date</mat-label>
+    <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="fromDate">
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>End Date</mat-label>
+    <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="toDate">
+    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+  </mat-form-field>
+  <form (ngSubmit)="bookingInquery()">
+    <div class="form-group">
+      <button (click)="bookingInquery()"  class="btn btn-primary" (click)="fetchData()"> Click Me!    </button>
+   </div>
+   </form>
+   <br>
+  
+  
+   
+
+   <!-- Display the API response 
+   <div *ngIf="response">
+    <h3>API Response:</h3>
+    <ul>
+      <li *ngFor="let booking of response; index as i">
+        <h4>Booking {{ i + 1 }}</h4>
+        <p><strong>Booking Date:</strong> {{ booking.bookingDate | date }}</p>
+        <p><strong>Amenities Name:</strong> {{ booking.aminitesName }}</p>
+        <p><strong>Turf Details:</strong> {{ booking.turfDetails }}</p>
+        <p><strong>User Details:</strong> {{ booking.userDetails }}</p>
+        <p><strong>Count:</strong> {{ booking.count }}</p>
+      </li>
+    </ul>
+  </div>
+</div>
+-->
+ <!-- Display the API response -->
+<!-- Display the API response -->
+
+  <div class="container-wrapper">
+    <div class="table-container" *ngIf="response && showTable">
+     
+      <table class="booking-table">
+        <thead>
+          <tr>
+            <th>Booking</th>
+            <th>Booking Date</th>
+            <th>Amenities Name</th>
+            <th>Turf Details</th>
+            <th>User Details</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of response; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ booking.bookingDate | date }}</td>
+            <td>{{ booking.aminitesName }}</td>
+            <td>{{ booking.turfDetails }}</td>
+            <td>{{ booking.userDetails }}</td>
+            <td>{{ booking.count }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  
+  
+ 
