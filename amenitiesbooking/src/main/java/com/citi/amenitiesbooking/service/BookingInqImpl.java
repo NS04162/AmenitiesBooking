@@ -42,7 +42,18 @@ public class BookingInqImpl implements BookingInqService{
 		
 		for (UserBookingInfo userBookingInfo : userBookingInfoList) {
 			Long countofCurrentBookingDate = countMapper.get(userBookingInfo.getBookingDate());
-			String amenityName=userBookingInfo.getBookedTurfNo().substring(4, 5);				
+			String amenityName=userBookingInfo.getBookedTurfNo().substring(4, 5);
+			String Cafe = "C";
+			if(amenityName.equalsIgnoreCase("C")) {
+				amenityName = "Cafe";
+				
+			}else if (amenityName.equalsIgnoreCase("F")) {
+				amenityName = "Football";
+			}else if (amenityName.equalsIgnoreCase("B")) {
+				amenityName = "Badminton";
+			}else
+				amenityName = "WorkCafe";
+			
 			
 			BookingInqResponse bookingInqResp=new BookingInqResponse(userBookingInfo.getBookingDate(),
 					amenityName,userBookingInfo.getBookedTurfNo(),
